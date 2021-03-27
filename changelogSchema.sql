@@ -69,6 +69,14 @@ CREATE TABLE ChangeHistory (
 	Remark VARCHAR
 	)
 
+CREATE TABLE Reference (
+	ChangeID INTEGER FOREIGN KEY REFERENCES Change(ChangeID),
+	RefType VARCHAR(100),
+	RefID VARCHAR(100),
+	PRIMARY KEY (ChangeID, RefType, RefID),
+	Remark VARCHAR
+	)
+
 /* ANOTHER WAY TO APPLY FOREIGN KEY */
 --ALTER TABLE AppliedChange
 --	ADD CONSTRAINT FK__ChangeID

@@ -2,14 +2,16 @@
 CREATE TABLE Change (
 	ChangeID INTEGER PRIMARY KEY,
 	HelpDeskRequestID INTEGER,
-	ChangeStatus VARCHAR
+	ChangeStatus VARCHAR,
+	Remark VARCHAR
 	)
 
 CREATE TABLE Problem (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES Change(ChangeID),
 	Description VARCHAR,
 	IdentifiedDate DATE,
-	IdentifiedBy VARCHAR(100)
+	IdentifiedBy VARCHAR(100),
+	Remark VARCHAR
 	)
 
 CREATE TABLE ChangeRequest (
@@ -21,7 +23,8 @@ CREATE TABLE ChangeRequest (
 	ApprovedDate DATE,
 	Department VARCHAR(100),
 	AffectedModules VARCHAR(100),
-	AffectedDepartments VARCHAR(100)
+	AffectedDepartments VARCHAR(100),
+	Remark VARCHAR
 	)
 	
 CREATE TABLE ChangePlan (
@@ -32,21 +35,24 @@ CREATE TABLE ChangePlan (
 	TargetSoftware VARCHAR(100),
 	TargetModule VARCHAR(100),
 	AffectedModules VARCHAR(100),
-	AffectedDepartments VARCHAR(100)
+	AffectedDepartments VARCHAR(100),
+	Remark VARCHAR
 	)
 
 CREATE TABLE ApprovedChange (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES ChangePlan(ChangeID),
 	Description VARCHAR,
 	ApprovedBY VARCHAR(100),
-	ApprovedDate VARCHAR(100)
+	ApprovedDate VARCHAR(100),
+	Remark VARCHAR
 	)
 
 CREATE TABLE AppliedChange (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES ApprovedChange(ChangeID),
 	Description VARCHAR,
 	AppliedBY VARCHAR(100),
-	AppliedDate DATE
+	AppliedDate DATE,
+	Remark VARCHAR
 	)
 
 CREATE TABLE ChangeHistory (
@@ -56,7 +62,8 @@ CREATE TABLE ChangeHistory (
 	ChangeRequestedDate DATE,
 	ChangePlannedDate DATE,
 	ChangeApprovedDate DATE,
-	ChangeAppliedDate DATE
+	ChangeAppliedDate DATE,
+	Remark VARCHAR
 	)
 
 /* ANOTHER WAY TO APPLY FOREIGN KEY */

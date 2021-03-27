@@ -2,50 +2,50 @@
 CREATE TABLE Change (
 	ChangeID INTEGER PRIMARY KEY,
 	HelpDeskRequestID INTEGER,
-	ChangeStatus TEXT
+	ChangeStatus VARCHAR
 	)
 
 CREATE TABLE Problem (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES Change(ChangeID),
-	Description TEXT,
+	Description VARCHAR,
 	IdentifiedDate DATE,
-	IdentifiedBy TEXT
+	IdentifiedBy VARCHAR(100)
 	)
 
 CREATE TABLE ChangeRequest (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES Problem(ChangeID),
-	Description TEXT,
+	Description VARCHAR,
 	RequestedDate DATE,
-	RequestedBY TEXT,
-	ApprovedBY TEXT,
+	RequestedBY VARCHAR(100),
+	ApprovedBY VARCHAR(100),
 	ApprovedDate DATE,
-	Department TEXT,
-	AffectedModules TEXT,
-	AffectedDepartments TEXT
+	Department VARCHAR(100),
+	AffectedModules VARCHAR(100),
+	AffectedDepartments VARCHAR(100)
 	)
 	
 CREATE TABLE ChangePlan (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES ChangeRequest(ChangeID),
-	Description TEXT,
+	Description VARCHAR,
 	PlannedDate DATE,
-	PlannedBY TEXT,
-	TargetSoftware TEXT,
-	TargetModule TEXT,
-	AffectedModules TEXT,
-	AffectedDepartments TEXT
+	PlannedBY VARCHAR(100),
+	TargetSoftware VARCHAR(100),
+	TargetModule VARCHAR(100),
+	AffectedModules VARCHAR(100),
+	AffectedDepartments VARCHAR(100)
 	)
 
 CREATE TABLE ApprovedChange (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES ChangePlan(ChangeID),
-	Description TEXT,
-	ApprovedBY TEXT,
-	ApprovedDate DATE
+	Description VARCHAR,
+	ApprovedBY VARCHAR(100),
+	ApprovedDate VARCHAR(100)
 	)
 
 CREATE TABLE AppliedChange (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES ApprovedChange(ChangeID),
-	Description TEXT,
-	AppliedBY TEXT,
+	Description VARCHAR,
+	AppliedBY VARCHAR(100),
 	AppliedDate DATE
 	)
 

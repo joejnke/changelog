@@ -2,11 +2,13 @@
 CREATE TABLE Change (
 	ChangeID INTEGER PRIMARY KEY,
 	HelpDeskRequestID INTEGER,
-	ChangeStatus VARCHAR,
+	ChangeStatus VARCHAR DEFAULT 'Change logged',
 	Remark VARCHAR,
 	Environment VARCHAR(100),
 	ChangeType VARCHAR(50),
-	CONSTRAINT check_changetype CHECK (ChangeType IN ('Emergency', 'Pre Approved', 'Standard'))
+	CONSTRAINT check_changetype CHECK (ChangeType IN ('Emergency', 'Pre Approved', 'Standard')),
+	CONSTRAINT check_changestatus CHECK (ChangeStatus IN ('Change logged', 'Problem Identified', 'Change Requested',
+													  'Change Planned', 'Change Approved', 'Change Applied'))
 	)
 
 CREATE TABLE Problem (

@@ -11,6 +11,19 @@ CREATE TABLE Change (
 													  'Change Planned', 'Change Approved', 'Change Applied'))
 	)
 
+-- Update history on Change logged
+CREATE TRIGGER UPDATE_ChangeHistory ON Change
+FOR INSERT 
+NOT FOR REPLICATION 
+AS
+ 
+BEGIN
+  INSERT INTO ChangeHistory 
+	(ChangeID, IncidentReportDate)
+	SELECT ChangeID, getdate()
+	FROM inserted
+END
+
 CREATE TABLE Problem (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES Change(ChangeID),
 	Description VARCHAR,
@@ -18,6 +31,19 @@ CREATE TABLE Problem (
 	IdentifiedBy VARCHAR(100),
 	Remark VARCHAR
 	)
+
+-- update change log history and status
+CREATE TRIGGER UPDATE_ChangeStatus_N_ChangeHistory ON Problem
+FOR INSERT 
+NOT FOR REPLICATION 
+AS
+ 
+BEGIN
+  INSERT INTO ChangeHistory 
+	(ChangeID, ProblemIdentifiedDate)
+	SELECT ChangeID, getdate()
+	FROM inserted
+END
 
 CREATE TABLE ChangeRequest (
 	ChangeID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES Problem(ChangeID),

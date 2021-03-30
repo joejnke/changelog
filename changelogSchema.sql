@@ -179,3 +179,32 @@ BEGIN
 	WHERE Change.ChangeID = (SELECT ChangeID FROM INSERTED)
 END
 -- end of trigger
+
+-- test query
+INSERT INTO Change
+	(HelpDeskRequestID, Environment, ChangeType)
+	VALUES (16756, 'Live', 'Pre Approved')
+
+INSERT INTO Problem
+	(ChangeID, Description, IdentifiedDate, IdentifiedBy, Remark)
+	VALUES (1, 'Dumy problem',getdate() , 'Kirubel', 'This just fo testing purpose')
+
+INSERT INTO ChangeRequest
+	(ChangeID, Description, RequestedDate, RequestedBy, Remark)
+	VALUES (1, 'Dumy change Request', getdate() , 'Kirubel', 'This is a change request for testing purpose')
+
+INSERT INTO ChangePlan
+	(ChangeID, Description, PlannedDate, PlannedBy, Remark)
+	VALUES (1, 'Dumy change plan', getdate() , 'Kirubel', 'This is a change plan for testing purpose')
+
+INSERT INTO ApprovedChange
+	(ChangeID, Description, ApprovedDate, ApprovedBy, Remark)
+	VALUES (1, 'Dumy change approval', getdate() , 'Kirubel', 'This is a change approval for testing purpose')
+
+INSERT INTO AppliedChange
+	(ChangeID, Description, AppliedDate, AppliedBy, Remark)
+	VALUES (1, 'Dumy change applied', getdate() , 'Kirubel', 'This is a change application for testing purpose')
+
+SELECT * FROM Change
+
+SELECT * FROM ChangeHistory
